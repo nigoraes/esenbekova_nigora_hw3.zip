@@ -6,15 +6,17 @@ public class Main {
 
         BankAccount bankAccount = new BankAccount();
         bankAccount.deposit(20000);
-        while (true);
-        try {
-            bankAccount.withDraw(6000);
-        }catch (LimitException e) {
+        while (true) {
             try {
-                bankAccount.withDraw((int) e.getRemainingAmount());
-            } catch (LimitException ex) {
-                ex.printStackTrace();
+                bankAccount.withDraw(6000);
+            } catch (LimitException e) {
+                try {
+                    bankAccount.withDraw((int) e.getRemainingAmount());
+                } catch (LimitException ex) {
+                    ex.printStackTrace();
+                }
+                break;
             }
-        }break;
+        }
     }
 }
